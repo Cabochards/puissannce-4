@@ -268,6 +268,7 @@ def lancer_partie(choix):
     Si choix = "standard", la fonction créera un nouveau tableau et lancera une nouvelle partie.
     Si choix = "retry", la fonction recréera un tableau de la même taille que le précédent.
     """
+    global tour
     global canvas
     global Gpuissance4
     if choix == "charger":                                      # Si le joueur veut charger une partie,
@@ -291,6 +292,7 @@ def lancer_partie(choix):
         Gpuissance4 = creer_grille(len(Gpuissance4), len(Gpuissance4[0]))   # On crée un nouveau tableau de la même taille que le précédent
         canvas = creer_canvas(Gpuissance4, size)                            # On crée un canevas correspondant à ce tableau
     
+    tour = randint(0,1)
     Jouer()                                         # On lance la partie dans tous les cas
 
 
