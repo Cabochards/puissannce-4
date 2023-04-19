@@ -367,7 +367,7 @@ def SauvegarderQuitter():
     bouton_savequit.grid_remove()
 
 def Gagner(gagnant=None):
-    """Cette fonction permet d'afficher l'écran de victoire ainsi que le nom du joueur ayant gagné,
+    """Cette fonction permet d'afficher l'écran de victoire ainsi que le nom du joueur ayant gagné s'il y a un gagnant,
     tout en masquant ce qui ne devrait pas être affiché sur cet écran.
     """
     if gagnant == 1:                                # Si le joueur 1 a gagné, cela affichera jaune
