@@ -1,4 +1,4 @@
-# Projet de Puissannce 4
+# Projet de Puissannce 4 en IN200N
 Groupe de TD : S2BITD02
 
 Membres du projet : Kier De Castro, Paul Junior Bessong, Maël Fajon
@@ -20,6 +20,9 @@ déclarée nulle.
 Afin d'être sûr que le script fonctionne correctement, veuillez vérifier que vous ayez bien les modules suivants d'installés : ***tkinter, os, random***
 
 # Utilisation
+Ouvrez le fichier main.py
+> Tout le code est dans ce fichier.
+
 Pour lancer le programme, clickez sur **Exécuter** depuis votre interpréteur. Une fenêtre devrait alors aparaître, vous permettant de choisir la taille de votre grille de Puissance 4, lancer une nouvelle partie, ou bien charger une partie précédente.
 
 Lorsque vous êtes en jeu *(après avoir sélectionné **Nouvelle partie** ou **Charger une partie**)*, vous pourrez cliquer sur un Canevas pour placer des pions.
@@ -29,6 +32,8 @@ Le bouton **Annuler** vous permettra d'annuler des coups déjà joués.
 
 **Sauvegarder/Quitter** vous permettra de sauvegarder votre partie, ainsi que de revenir au menu principal, de sélection de partie.
 
-Si un joueur gagne une partie ou qu'il y a match nul, vous aurez directement la possibilité de recommencer une partie avec la même grille (elle sera de même taille mais vide).
+> Lorsque vous sauvegarderez, un fichier nommé puissance_4_save.txt sera créé. Il s'agit là de votre sauvegarde. A chaque fois que vous sauvegardez, son contenu est remplacé par celui de la dernière partie. Vous pouvez le supprimer si vous ne voulez pas garder la sauvegarde. Ne pas avoir de fichier de sauvegarde déjà existant fera que le bouton **Charger une partie** lancera une nouvelle partie.
+
+Si un joueur gagne une partie ou qu'il y a match nul, vous aurez directement la possibilité de recommencer une partie avec la même grille (elle sera de même taille que la précédente, mais vide).
 
 Pour fermer la fenêtre et quitter le jeu, cliquez sur la croix en haut à droite de la fenêtre.
