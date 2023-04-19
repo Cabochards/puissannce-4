@@ -1,20 +1,21 @@
-from pygame import mixer
 from os.path import isfile, realpath, dirname
+from random import randint
+# from pygame import mixer
 from os import getcwd
 import tkinter as tk
-import sys
 
-mon_chemin = realpath(__file__)                 # Permet de savoir le chemin du script dans l'ordinateur
-mon_chemin = dirname(mon_chemin)                # Permet de savoir dans quel dossier nous sommes (pour le son et la sauvegarde)
 
-mixer.init()
-pion_sound = mixer.Sound(mon_chemin + "\super-mario-64-thwomp-sound-online-audio-converter.mp3")
+mon_chemin = realpath(__file__)                     # Permet de savoir le chemin du script dans l'ordinateur
+mon_chemin = dirname(mon_chemin)                    # Permet de savoir dans quel dossier nous sommes (pour la sauvegarde)
+
+# mixer.init()
+# pion_sound = mixer.Sound(mon_chemin + "\super-mario-64-thwomp-sound-online-audio-converter.mp3")
 
 fenetre = tk.Tk()
 fenetre.title("Puissance 4")
 
 size = 50
-tour = 1
+tour = randint(0,1)                                 # Choisit aléatoirement quel joueur va jouer en premier
 pion = 1
 last_moves = []
 colors=["red","yellow","dark blue","blue","white"]
@@ -28,10 +29,10 @@ def recuperer(file_name):
     Elle prend en argument le nom d'un fichier (par exemple : 'test.txt'),
     et renvoie le texte contenu dans ce fichier, si le fichier existe, ou renvoie -1 dans le cas contraire.
     """
-    if isfile(file_name):                       # Si le fichier existe,
-        file = open(file_name,'r')              # Ouvre le fichier
-        lines = file.readlines()                # Puis lit le fichier
-        file.close()                            # Avant de le refermer
+    if isfile(file_name):                           # Si le fichier existe,
+        file = open(file_name,'r')                  # Ouvre le fichier
+        lines = file.readlines()                    # Puis lit le fichier
+        file.close()                                # Avant de le refermer
         return lines
     return -1
 
@@ -46,16 +47,16 @@ def modifier(file_name,text='',ligne=None):
     Si le fichier existe, la fonction va lire son contenu.
     Si ligne = None, alors le texte sera ajouté à la fin du fichier. Sinon, le texte sera ajouté à la ligne spécifiée.
     """
-    lines = recuperer(file_name)                # Récupère le contenu du fichier
-    if lines == -1:                             # Si le fichier n'existe pas, on crée une liste vide, qui contiendra notre nouveau texte
+    lines = recuperer(file_name)                    # Récupère le contenu du fichier
+    if lines == -1:                                 # Si le fichier n'existe pas, on crée une liste vide, qui contiendra notre nouveau texte
         lines = []
 
-    if ligne is None or ligne >= len(lines):    # Si ligne est vide ou plus grand que le nombre de lignes du fichier,
-        lines.append(text)                      # On ajoute le texte à la fin
+    if ligne is None or ligne >= len(lines):        # Si ligne est vide ou plus grand que le nombre de lignes du fichier,
+        lines.append(text)                          # On ajoute le texte à la fin
     else:
-        lines[ligne] = text                     # Sinon, on l'ajoute à la ligne mentionnée
+        lines[ligne] = text                         # Sinon, on l'ajoute à la ligne mentionnée
 
-    file = open(file_name, 'w')                 # Ecrit le nouveau texte dans le fichier
+    file = open(file_name, 'w')                     # Ecrit le nouveau texte dans le fichier
     file.writelines(lines)
     file.close()
 
@@ -85,12 +86,12 @@ def transform_to_string(tab):
     Elle prend en argument une liste de liste, et renvoie une chaîne de caractères.
     """
     text = ''
-    for i in range(len(tab)):                   # Parcourt les lignes
-        for j in range(len(tab[i])):            # Parcourt les colonnes
-            text += bin(tab[i][j])              # Convertit les pions en binaire
-            if j != len(tab[i])-1:              # Tant qu'on n'est pas à la dernière colonne,
-                text += ' '                     # On met un espace
-        text += '\n'                            # Une fois à la fin de la ligne, on fait un retour à la ligne
+    for i in range(len(tab)):                       # Parcourt les lignes
+        for j in range(len(tab[i])):                # Parcourt les colonnes
+            text += bin(tab[i][j])                  # Convertit les pions en binaire
+            if j != len(tab[i])-1:                  # Tant qu'on n'est pas à la dernière colonne,
+                text += ' '                         # On met un espace
+        text += '\n'                                # Une fois à la fin de la ligne, on fait un retour à la ligne
     return text
 
 
@@ -102,8 +103,8 @@ def creer_grille(x,y):
     Elle prend en arguments deux entiers, x et y, et renvoie un tableau de x lignes et y colonnes.
     """
     grille = []
-    for i in range(x):                          # Pour chaque ligne,
-        grille += [[0 for j in range(y)]]       # Crée une ligne contenant y 0
+    for i in range(x):                              # Pour chaque ligne,
+        grille += [[0 for j in range(y)]]           # Crée une ligne contenant y 0
     return grille
 
 def afficher_grille(grille):
@@ -128,13 +129,13 @@ def placer_pion(grille,x,pion):
     et remplace la première occurence d'un 0 dans la ligne grille[x] par pion.
     S'il n'y a aucun 0, la fonction renvoie -1.
     """
-    for y in range(len(grille[x])):             # Parcourt la ligne x
-        if grille[x][y] == 0:                   # Si la valeur présente dans la colonne y est un 0,
-            remplacer_pion(grille, x, y, pion)  # On la remplace par pion
-            return y                            # Et on renvoie la colonne y
-    return -1                                   # S'il n'y a aucun 0, on renvoie -1
+    for y in range(len(grille[x])):                 # Parcourt la ligne x
+        if grille[x][y] == 0:                       # Si la valeur présente dans la colonne y est un 0,
+            remplacer_pion(grille, x, y, pion)      # On la remplace par pion
+            return y                                # Et on renvoie la colonne y
+    return -1                                       # S'il n'y a aucun 0, on renvoie -1
 
-## Verifier pions
+## Verifier pions ; cette fonction a été recherchée sur internet, puis légèrement modifiée pour correspondre à ce que l'on désirait.
 def verifier_4(grille,pion):
     """
     Cette fonction vérifie si 4 pions sont alignés horizontalement,
@@ -142,28 +143,39 @@ def verifier_4(grille,pion):
     Elle prend en arguments une liste de listes (grille), ainsi qu'un entier (pion),
     et renvoie True si 4 pions sont alignés, et False sinon.
     """
-    for i in range(len(grille)):                # Pour chaque ligne:
-        for j in range(len(grille[i])-3):       # Pour chaque colonne: (attention, on met -3 pour ne pas sortir de la grille)
+    for i in range(len(grille)):                   # Pour chaque ligne:
+        for j in range(len(grille[i])-3):          # Pour chaque colonne: (attention, on met -3 pour ne pas sortir de la grille)
             if grille[i][j] == pion and grille[i][j+1] == pion and grille[i][j+2] == pion and grille[i][j+3] == pion:
-               return True                      # 4 pions sont alignés
+               return True                          # 4 pions sont alignés
 
-    for i in range(len(grille)-3):              # Pour chaque ligne: (attention, on met -3 pour ne pas sortir de la grille)
-        for j in range(len(grille[i])):         # Pour chaque colonne:
+    for i in range(len(grille)-3):                  # Pour chaque ligne: (attention, on met -3 pour ne pas sortir de la grille)
+        for j in range(len(grille[i])):             # Pour chaque colonne:
             if grille[i][j] == pion and grille[i+1][j] == pion and grille[i+2][j] == pion and grille[i+3][j] == pion:
-                return True                     # 4 pions sont alignés
+                return True                         # 4 pions sont alignés
 
-    for i in range(len(grille)-3):              # Pour chaque ligne: (attention, on met -3 pour ne pas sortir de la grille)
-        for j in range(len(grille[i])-3):       # Pour chaque colonne: (attention, on met -3 pour ne pas sortir de la grille)
+    for i in range(len(grille)-3):                  # Pour chaque ligne: (attention, on met -3 pour ne pas sortir de la grille)
+        for j in range(len(grille[i])-3):           # Pour chaque colonne: (attention, on met -3 pour ne pas sortir de la grille)
             if grille[i][j] == pion and grille[i+1][j+1] == pion and grille[i+2][j+2] == pion and grille[i+3][j+3] == pion:
-                return True                     # 4 pions sont alignés
+                return True                         # 4 pions sont alignés
 
-    for i in range(len(grille)-3):              # Pour chaque ligne: (attention, on met -3 pour ne pas sortir de la grille)
-        for j in range(3,len(grille[i])):       # Pour chaque colonne: (attention, on met 3 pour ne pas sortir de la grille (on va de droite à gauche ici))
+    for i in range(len(grille)-3):                  # Pour chaque ligne: (attention, on met -3 pour ne pas sortir de la grille)
+        for j in range(3,len(grille[i])):           # Pour chaque colonne: (attention, on met 3 pour ne pas sortir de la grille (on va de droite à gauche ici))
             if grille[i][j] == pion and grille[i+1][j-1] == pion and grille[i+2][j-2] == pion and grille[i+3][j-3] == pion:
-                return True                     # 4 pions sont alignés
+                return True                         # 4 pions sont alignés
 
     return False
 
+
+def Verifier_match_nul(grille):
+    """
+    Cette fonction vérifie si toutes les cases sont pleines.
+    Elle prend en arguments une liste de listes (grille),
+    et renvoie True la grille ne contient plus aucun 0, et False sinon.
+    """
+    nul = True
+    for ligne in grille:
+        nul = nul and all(ligne)
+    return nul
 
 
 ## tkinter
@@ -197,28 +209,31 @@ def Placer(event):
     global pion
     global last_moves
 
-    x = event.x//size                           # Récupère la colonne
+    x = event.x//size                               # Récupère la colonne
 
-    if tour%2==0:                               # Choisit quel joueur va jouer
-        pion = 2                                # en fonction du tour
+    if tour%2==0:                                   # Choisit quel joueur va jouer
+        pion = 2                                    # en fonction du tour
     else:
         pion = 1
 
-    if -1 < x < len(Gpuissance4):               # Si on ne dépasse pas du tableau, on joue
-        y = placer_pion(Gpuissance4, x, pion)   # On place un pion et on récupère où il a été placé
-        if y != -1:                             # S'il a pu être placé,
-            pion_sound.play()                   # On joue un son
-            last_moves.append((x,y))            # On ajoute le coup dans les coups joués
-            bouton_annuler["state"] = "normal"  # Et le joueur pourra annuler son coup au prochain tour
+    if -1 < x < len(Gpuissance4):                   # Si on ne dépasse pas du tableau, on joue
+        y = placer_pion(Gpuissance4, x, pion)       # On place un pion et on récupère où il a été placé
+        if y != -1:                                 # S'il a pu être placé,
+            # pion_sound.play()                      # On joue un son
+            last_moves.append((x,y))                # On ajoute le coup dans les coups joués
+            bouton_annuler["state"] = "normal"      # Et le joueur pourra annuler son coup au prochain tour
 
             X = x*size                                                          # Taille horizontale d'un cercle
             Y = (len(Gpuissance4[0])-y)*size                                    # Taille verticale d'un cercle
             canvas.create_oval(X+4,Y-4,X+size-4,Y-size+4,fill=colors[tour%2])   # Dessine un cercle
 
-            if verifier_4(Gpuissance4, pion):   # Si le joueur a aligné 4 pions de sa couleur,
-                Gagner()                        # Le joueur a gané
+            if verifier_4(Gpuissance4, pion):       # Si le joueur a aligné 4 pions de sa couleur,
+                Gagner(tour%2)                      # Le joueur a gagné
+            
+            elif Verifier_match_nul(Gpuissance4):   # Si aucun joueur n'a gagné,
+                Gagner()                            # Match nul
 
-            tour += 1                           # On passe au tour du joueur adverse
+            tour += 1                               # On passe au tour du joueur adverse
 
 def Annuler():
     """
@@ -232,15 +247,15 @@ def Annuler():
     global tour
     global last_moves
 
-    if any(last_moves):                         # S'il y a un coup à annuler,
-        x,y = last_moves.pop()                  # On récupère où
-        remplacer_pion(Gpuissance4, x, y, 0)    # On met un 0 à la position xy
+    if any(last_moves):                             # S'il y a un coup à annuler,
+        x,y = last_moves.pop()                      # On récupère où
+        remplacer_pion(Gpuissance4, x, y, 0)        # On met un 0 à la position xy
 
         X = x*size                                                      # Taille horizontale d'un cercle
         Y = (len(Gpuissance4[0])-y)*size                                # Taille verticale d'un cercle
         canvas.create_oval(X+4,Y-4,X+size-4,Y-size+4,fill=colors[2])    # Dessine un cercle bleu pour cacher celui du joueur
         
-        tour -= 1                               # Redonne la main au dernier joueur
+        tour -= 1                                   # Redonne la main au dernier joueur
 
         if not any(last_moves):
             bouton_annuler["state"] = "disabled"    # S'il n'y a aucun coup à annuler, on ne peut plus annuler
@@ -276,7 +291,7 @@ def lancer_partie(choix):
         Gpuissance4 = creer_grille(len(Gpuissance4), len(Gpuissance4[0]))   # On crée un nouveau tableau de la même taille que le précédent
         canvas = creer_canvas(Gpuissance4, size)                            # On crée un canevas correspondant à ce tableau
     
-    Jouer()                                     # On lance la partie dans tous les cas
+    Jouer()                                         # On lance la partie dans tous les cas
 
 
 ## menus/fenetres
@@ -351,16 +366,19 @@ def SauvegarderQuitter():
     bouton_annuler.grid_remove()
     bouton_savequit.grid_remove()
 
-def Gagner():
+def Gagner(gagnant=None):
     """Cette fonction permet d'afficher l'écran de victoire ainsi que le nom du joueur ayant gagné,
     tout en masquant ce qui ne devrait pas être affiché sur cet écran.
     """
-    if tour%2 == 1:
+    if gagnant == 1:                                # Si le joueur 1 a gagné, cela affichera jaune
         couleur = "jaune"
-    else:
+    elif gagnant == 0:                              # Si le joueur 2 a gagné, cela affichera jaune
         couleur = "rouge"
-
-    label_gagner['text'] = f"Le joueur {couleur} a gagné !\n Voulez-vous recommencer la partie ?" # Modifie le message de victoire en fonction du gagnant
+    
+    if gagnant == None:                             # Si aucun joueur n'a gagné, cela écrira Match nul
+        label_gagner['text'] = "Egalité, personne n'a gagné !\n Voulez-vous recommencer la partie ?" # Modifie le message de victoire en fonction du gagnant
+    else:
+        label_gagner['text'] = f"Le joueur {couleur} a gagné !\n Voulez-vous recommencer la partie ?" # Modifie le message de victoire en fonction du gagnant
     
     # Les grid() affichent les widgets, et les grid_remove() les masquent
     
@@ -373,8 +391,6 @@ def Gagner():
     canvas.grid_remove()
     bouton_annuler.grid_remove()
     bouton_savequit.grid_remove()
-
-
 
 
 
