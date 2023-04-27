@@ -32,7 +32,7 @@ Le bouton **Annuler** vous permettra d'annuler des coups déjà joués.
 
 **Sauvegarder/Quitter** vous permettra de sauvegarder votre partie, ainsi que de revenir au menu principal, de sélection de partie.
 
-> Lorsque vous sauvegarderez, un fichier nommé puissance_4_save.txt sera créé. Il s'agit là de votre sauvegarde. A chaque fois que vous sauvegardez, son contenu est remplacé par celui de la dernière partie. Vous pouvez le supprimer si vous ne voulez pas garder la sauvegarde. Ne pas avoir de fichier de sauvegarde déjà existant fera que le bouton **Charger une partie** lancera une nouvelle partie.
+> Lorsque vous sauvegarderez, un fichier nommé puissance_4_save.txt sera créé. Il s'agit là de votre sauvegarde. A chaque fois que vous sauvegardez, son contenu est remplacé par celui de la dernière partie. Vous pouvez supprimer ce fichier si vous ne voulez pas garder la sauvegarde. Ne pas avoir de fichier de sauvegarde déjà existant fera que le bouton **Charger une partie** lancera une nouvelle partie.
 
 Si un joueur gagne une partie ou qu'il y a match nul, vous aurez directement la possibilité de recommencer une partie avec la même grille (elle sera de même taille que la précédente, mais vide).
 
