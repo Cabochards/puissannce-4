@@ -1,4 +1,4 @@
-# Projet de Puissannce 4 en IN200N
+# Projet Puissannce 4 en IN200N
 Groupe de TD : S2BITD02
 
 Membres du projet : Kier De Castro, Paul Junior Bessong, Maël Fajon
