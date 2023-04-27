@@ -37,6 +37,8 @@ Le bouton **Annuler** vous permettra d'annuler des coups déjà joués.
 Si un joueur gagne une partie ou qu'il y a match nul, vous aurez directement la possibilité de recommencer une partie avec la même grille (elle sera de même taille que la précédente, mais vide).
 
 Pour fermer la fenêtre et quitter le jeu, cliquez sur la croix en haut à droite de la fenêtre.
+
+
 ![image](https://user-images.githubusercontent.com/90553363/234916328-9c2e334d-584b-43cc-890a-108c1af6eca3.png)
 ![image](https://user-images.githubusercontent.com/90553363/234916433-cd08c54f-2b27-4935-b3ac-7900c25e87f2.png)
 
