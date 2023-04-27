@@ -60,6 +60,10 @@ def modifier(file_name,text='',ligne=None):
     file.writelines(lines)
     file.close()
 
+def supprimer(file_name):
+    fichier = open(file_name, 'w')
+    fichier.close()
+    
 
 def transform_to_tab(file_name):
     """
@@ -398,7 +402,7 @@ def Gagner(gagnant=None):
 
 ## widgets
 label_quitter = tk.Label(fenetre,text="Voulez-vous sauvegarder avant de quitter ?")
-save_oui = tk.Button(fenetre, text="oui",command=lambda:[modifier(mon_chemin + '\Puissance_4_save.txt',transform_to_string(Gpuissance4)),Menu()])
+save_oui = tk.Button(fenetre, text="oui",command=lambda:[supprimer(mon_chemin + '\Puissance_4_save.txt'),modifier(mon_chemin + '\Puissance_4_save.txt',transform_to_string(Gpuissance4)),Menu()])
 save_non = tk.Button(fenetre, text="non",command=lambda:Menu())
 
 label_choix = tk.Label(fenetre,text="Puissance 4")
